@@ -684,6 +684,19 @@ function updateProgress(){
 // ============================================================
 // submit
 // ============================================================
+// ============================================================
+// BUG FIX: prevent Enter key from silently auto-submitting the form
+// when a respondent is typing in a short text field (Ministry, Name,
+// Evidence, etc). Browsers submit a form by default on Enter inside
+// any <input type="text">; textareas are unaffected since Enter just
+// adds a newline there, and the submit button itself still works.
+// ============================================================
+$('qForm').addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.getAttribute('type') !== 'submit'){
+    e.preventDefault();
+  }
+});
+
 $('qForm').addEventListener('submit', async function(e){
   e.preventDefault();
   const g = DATA[currentKey];
