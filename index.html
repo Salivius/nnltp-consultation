@@ -873,6 +873,7 @@ $('qForm').addEventListener('submit', async function(e){
   formData.append('Date_Completed', new Date().toISOString().slice(0,10));
   formData.append('Time_Completed', new Date().toTimeString().slice(0,8));
   formData.append('Mode', 'Online form (this tool)');
+  formData.append('Questionnaire_Format', ['youth','consumers','community'].includes(currentKey) ? 'Simplified (choice-based)' : 'Standard (open text)');
   formData.append('Created', 'x-sheetmonkey-current-date-time');
 
   document.querySelectorAll('#respondentBlock input[data-resp]').forEach(inp=>{
